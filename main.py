@@ -1,4 +1,51 @@
 import streamlit as st
+import streamlit.components.v1 as components
+
+# PASTE KODE TAWK.TO YANG ANDA SALIN DI SINI
+TAWK_TO_EMBED_CODE = """
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/YOUR_PROPERTY_ID/YOUR_WIDGET_ID';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+"""
+
+def inject_tawk_to():
+    """Menyuntikkan kode Tawk.to menggunakan Streamlit components."""
+    # Tinggi dan lebar diset ke 0 karena kita hanya perlu menjalankan skrip, 
+    # widget Tawk.to akan muncul sebagai overlay di seluruh halaman.
+    components.html(
+        TAWK_TO_EMBED_CODE, 
+        height=0, 
+        width=0
+    )
+
+# --- Aplikasi Streamlit Utama ---
+st.set_page_config(page_title="Streamlit dengan Tawk.to", layout="wide")
+
+# Panggil fungsi injeksi Tawk.to di awal aplikasi
+inject_tawk_to()
+
+st.title("Aplikasi Streamlit dengan Widget Live Chat Tawk.to")
+st.markdown("---")
+
+st.subheader("Selamat Datang!")
+st.write("""
+Widget Live Chat dari **Tawk.to** seharusnya sudah muncul di sudut kanan bawah aplikasi ini.
+Anda bisa menggunakannya untuk berinteraksi langsung dengan tim support.
+""")
+
+st.warning("Catatan: Widget Tawk.to mungkin memerlukan waktu sebentar untuk memuat setelah aplikasi Streamlit di-refresh.")
+
+# Contoh konten lain di aplikasi Anda
+st.selectbox("Pilih Opsi", ["A", "B", "C"])
+st.button("Klik Saya")
 
 # --- Data Informasi (Bisa dipindahkan ke file config jika kompleks) ---
 INFO_UMUM = {
@@ -91,4 +138,5 @@ for key, value in INFO_UMUM.items():
     st.sidebar.caption(f"**{key}:** {value}")
 
 st.markdown("---")
+
 st.markdown("© 2025 PT. Sucofindo. Hak Cipta Dilindungi.")
